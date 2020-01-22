@@ -2,17 +2,30 @@ include <defaults.scad>;
 use <Nut.scad>;
 use <Bolt.scad>;
 
-h_nut_m3 = 2.25;
-a_nut_m3 = 5.4;
-A_nut_m3 = a_nut_m3 / 2;
-d_head_m3 = 5.4;
-h_head_m3 = 3.2;
-d_m3 = 3;
+m3_nut_height = 2.25;
+m3_nut_diameter = 5.4;
+m3_nut_radius = m3_nut_diameter / 2;
 
-module NutM3(tolerance=default_metric_tolerance, h=h_nut_m3, inset=1) {
-  Nut(h=h, A=A_nut_m3, tolerance=tolerance, inset=inset);
+m3_head_height = 3.2;
+m3_head_diameter = 5.4;
+m3_shaft_diameter = 3;
+
+module NutM3(inset=1, height=m3_nut_height, tolerance=default_metric_tolerance) {
+    Nut(
+        height=height, 
+        apothem=m3_nut_radius, 
+        tolerance=tolerance, 
+        inset=inset
+    );
 }
 
-module BoltM3(l=10, tolerance=default_metric_tolerance, inset=1) {
-  Bolt(l=l, h_head=h_head_m3, d_head=d_head_m3, d=d_m3, tolerance=tolerance, inset=inset);
+module BoltM3(bolt_length=10, tolerance=default_metric_tolerance, inset=1) {
+    Bolt(
+        shaft_length = bolt_length,
+        shaft_diameter= m3_shaft_diameter, 
+        head_height = m3_head_height, 
+        head_diameter = m3_head_diameter, 
+        tolerance=tolerance,
+        inset=inset
+    );
 }

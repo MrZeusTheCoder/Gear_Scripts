@@ -61,7 +61,8 @@ module Demo()
 	//Polygon(N=6,A=60,h=0,debug=false);
 	//Polygon(N=6,A=60,h=5,debug=true);
 
-    Enneagon(A=50);
+    //Enneagon(A=50);
+    Hexagon(A=50);
 }
 
 
@@ -173,7 +174,7 @@ module _Build_Polygon(N=3,R=1,h=0)
 	else
 	{
 		// 2D primitive h=0
-		circle(r=R,$fn=N,center=true);
+		circle(r=R, $fn=N, center=true);
 	}
 }
 
@@ -181,7 +182,7 @@ module _Build_Polygon(N=3,R=1,h=0)
 // Building lots from N=3, N=N+1
 // http://en.wikipedia.org/wiki/Polygon
 //------------------------------------------------------------
-
+/*
 // 3 sides
 module Trigon(A=0,R=0,S=0,h=0,debug=false)
 	{Polygon(N=3,A=A,R=R,S=S,h=h,debug=debug);}
@@ -202,11 +203,11 @@ module Quadrangle(A=0,R=0,S=0,h=0,debug=false)
 // 5 sides
 module Pentagon(A=0,R=0,S=0,h=0,debug=false)
 	{Polygon(N=5,A=A,R=R,S=S,h=h,debug=debug);}
-
+*/
 // 6 sides
 module Hexagon(A=0,R=0,S=0,h=0,debug=false)
 	{Polygon(N=6,A=A,R=R,S=S,h=h,debug=debug);}
-
+/*
 // 7 sides
 module Heptagon(A=0,R=0,S=0,h=0,debug=false)
 	{Polygon(N=7,A=A,R=R,S=S,h=h,debug=debug);}
@@ -239,5 +240,6 @@ module Dodecagon(A=0,R=0,S=0,h=0,debug=false)
 // 100 sides
 module Hectogon(A=0,R=0,S=0,h=0,debug=false)
 	{Polygon(N=100,A=A,R=R,S=S,h=h,debug=debug);}
+*/
 
 //==EOF=======================================================

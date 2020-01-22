@@ -1,22 +1,28 @@
 include <defaults.scad>;
 
-module Bolt(
-  l=10,
-  h_head=5,
-  d_head=10,
-  d=5,
-  tolerance=default_metric_tolerance,
-  inset=1,
-  extra_tolerance=default_bolt_extra_tolerance
-) {
-  r_head = d_head/2;
-  r = d/2;
+//----------------------------------------------//
+//Usage - Bolt();
+//
+// shaft_length - Length of the bolt's shaft.
+// shaft_diameter - Diameter of the bolt's shaft.
+// head_height - Height of the bolt's head.
+// tolerance - Size tolerance for the bolt.
+// extra_tolerance - An extra tolerance.
+// inset - To inset or to not inset, that is a question you have to friggin' have to answer yourself.
+//
+//----------------------------------------------//
 
-  translate([0, 0, -inset*h_head]){
+module Bolt(shaft_length=10, shaft_diameter=5, head_height=5, head_diameter=10, tolerance=default_metric_tolerance, extra_tolerance=default_bolt_extra_tolerance, inset=1){
+  head_radius = head_diameter / 2;
+  shaft_radius = shaft_diameter / 2;
+
+  translate([0, 0, -inset * head_height]){
     translate([0, 0, 0.01])
-    cylinder(r=r_head+tolerance*2, h=h_head);
+    cylinder(r=head_radius + (tolerance*2), h=head_height);
 
-    translate([0, 0, -l+0.01])
-    cylinder(r=r+tolerance*2+extra_tolerance, h=l+0.01);
+    translate([0, 0, -shaft_length + 0.01])
+    cylinder(r=shaft_radius + (tolerance*2) + extra_tolerance, h=shaft_length + 0.01);
   }
 }
+
+Bolt();

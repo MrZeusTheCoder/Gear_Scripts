@@ -1,4 +1,4 @@
-### Moved up here for your sake:
+### Moved up here for your sake (by MrZeusTheCoder, not b33j0r):
 
 # Acknowledgements
 
