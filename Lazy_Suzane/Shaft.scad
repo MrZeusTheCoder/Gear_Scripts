@@ -1,4 +1,4 @@
-$fn=128; //Increased resolution for the shaft, which needs high res to acheive a good print
+$fn=128; //Increased resolution for the shaft, which needs high res to achieve a good print
          //that will mate with the bearing.
 
 union(){
