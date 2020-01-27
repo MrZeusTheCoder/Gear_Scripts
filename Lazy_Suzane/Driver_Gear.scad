@@ -4,6 +4,8 @@ use <../bolt_lib/M2.scad>
 $fn=96;
 
 
+module driver_gear(){
+
 difference(){
     //Gear, base, center bore, and nut inlay:
     difference(){
@@ -25,17 +27,22 @@ difference(){
 
         //Nut inlay:
         union(){
-            translate([-4,0,5])
+            translate([-4.5,0,5])
             rotate([0,90,0])
+            scale(1.05)
             NutM2();
 
-            translate([-4-(1.5/2),0,0])
-            cube(size=[1.5, 4.5, 10], center=true);
+            translate([-4.5-(1.5/2),0,0])
+            cube(size=[2.3, 4.8, 10], center=true);
         }
     }
 
-    //Bolt 
+    //Bolt
     translate([-10,0,5])
     rotate([0,-90,0])
     BoltM2(6);
 }
+
+}
+
+driver_gear();

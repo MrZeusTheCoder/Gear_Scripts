@@ -2,6 +2,8 @@ use <../gear_lib/gears.scad>
 
 r = 70;
 
+//For more assembly-like usage in other files
+module driven_gear(){
 difference(){
 	//Herringbone gear with center cut for bearing:
 	union(){
@@ -25,3 +27,6 @@ difference(){
 			cylinder(20, 15, 15);
 	}
 }
+
+}
+driven_gear();
