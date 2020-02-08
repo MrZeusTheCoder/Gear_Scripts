@@ -3,12 +3,11 @@ use <../bolt_lib/Nut.scad>
 use <Driven_Gear.scad>
 use <Driver_Gear.scad>
 
-$fn=48;
+$fn=96;
+
+function normalize_colour(r, g, b) = [r / 255, g / 255, b / 255];
 
 screw_hole_radius = 110;
-
-//translate([0,0,35])
-//driven_gear();
 
 module bassy(){
 
@@ -35,7 +34,7 @@ difference(){
         difference(){
             //Main valley:
             translate([0,0,4])
-            cylinder(r=90, h=50);
+            cylinder(r=87, h=50);
             //Bolt support structure:
             union(){
                 //Main up that allows for the bolt to not be cut through the main valley floor:
@@ -48,31 +47,55 @@ difference(){
             
         }
     }
-    //Bolt inlay:
+    //Hardware cuts/inlays:
     union(){
-        //Bolt body:
-        translate([0,0,-0.01])
-        cylinder(r=5.1, h=60); //Diameter set to 10.2 for print tolerance and filet transition.
-        //Hex head: (according to the specs of A2-70. Whatever that means.)
-        Nut(8, 8.5, 0.01, false);
+        //Bearing Holder Mechinizm™.
+        union(){
+            holder_radius = 93;
+            holder_height = 23.5;
+            bolt_length = 12;
+            bolt_radius = holder_radius + bolt_length;
+            
+            for(i=[45:90:360]){
+                translate([holder_radius * sin(i), holder_radius * cos(i), holder_height])
+                rotate([90+i, 90, 0])
+                NutM4();
+                translate([bolt_radius * sin(i), bolt_radius * cos(i), holder_height])
+                rotate([i-90,90, 0])
+                color([0.5, 0.5, 0.5])
+                BoltM4(25, inset=0);
+                translate([bolt_radius * sin(i), bolt_radius * cos(i), holder_height])
+                rotate([i+90,90, 0])
+                cylinder(r=14, h=9);
+            }
+        }
+        //Bolt inlay:
+        union(){
+            //Bolt body:
+            translate([0,0,-0.01])
+            cylinder(r=5.1, h=60); //Diameter set to 10.2 for print tolerance and filet transition.
+            //Hex head: (according to the specs of A2-70. Whatever that means.)
+            Nut(8, 8.5, 0.01, false);
+        }
     }
+    
 }
 
 }
 
 //Bearing-holders: (W.I.P.)
-/*
-holder_radius = 20;
-union(){
-    for(i=[0:90:360]){
-        translate([holder_radius*sin(i), holder_radius*cos(i), 100])
-        rotate([holder_radius*sin(i), 90, 0])
-        NutM4();
-        translate([0,0,100])
-        rotate([0,90, 0])
-        BoltM4(12);
-    }
-}
-*/
 
-bassy();
+
+color(normalize_colour(35, 90, 200))
+difference(){
+    bassy();
+    
+
+}
+
+/*
+for(i=[45:90:360]){
+    translate([100 * sin(i), 100 * cos(i), holder_height])
+    rotate([i-90, 90, 0])
+    cylinder(r=13, h=8);
+}*/
